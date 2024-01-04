@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}History{% endblock  %}
+
+{% block navbar %}
+    {% include "include/menu.html" %}
+{% endblock  %}
+
+{% block content %}
+<div class="container-xl px-4 mt-4 mb-5">
+  <!-- Account page navigation-->
+  {% include "include/account_menu.html" %}
+  <div class="card mb-4">
+    <div class="card-header">Billing History</div>
+    <div class="card-body p-0">
+        <!-- Billing history table with scrolling -->
+        <div class="table-responsive table-billing-history" style="max-height: 400px; overflow-y: auto;">
+            <table class="table mb-0">
+                <thead>
+                    <tr>
+                        <th class="border-gray-200" scope="col">Transaction ID</th>
+                        <th class="border-gray-200" scope="col">Date</th>
+                        <th class="border-gray-200" scope="col">Amount</th>
+                        <th class="border-gray-200" scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for history_items in user_purchase_history %}
+                        <tr>
+                            <td>#{{history_items.id}}</td>
+                            <td>{{history_items.purchase_date}}</td>
+                            <td>{{history_items.total_amount}}</td>
+                            <td><span class="badge bg-success">Paid</span></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock  %}
+
+{% block footer %}
+    {% include "include/footer.html" %}
+{% endblock  %}

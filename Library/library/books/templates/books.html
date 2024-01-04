@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if objects.object_list|length == 0 %}
+        Not Found
+    {% else %}
+        {{page_title}}
+    {% endif %}
+{% endblock  %}
+
+{% block navbar %}
+    {% include "include/menu.html" %}
+{% endblock  %}
+
+{% block content %}
+    <div class="album py-5 h-100">
+        <h3 class="text-dark px-5 text-center pb-4">
+            {% if objects.object_list|length == 0 %}
+                Not Found
+            {% else %}
+                {{page_title}}
+            {% endif %}
+        </h3>
+        <div class="container-fluid px-5">
+            
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+                {% for book in objects.object_list %}
+                    {% include "include/book.html" with book=book %}
+                {% endfor %}
+            </div>
+        </div>
+        {% if objects.object_list and book_count > 16 %}
+            {% include "include/pagination.html" %}
+        {% endif %}
+    </div>    
+{% endblock  %}
+
+{% block footer %}
+    {% include "include/footer.html" %}
+{% endblock  %}

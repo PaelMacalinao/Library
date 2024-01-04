@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home {
+  display: inline-block;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://miro.medium.com/v2/resize:fit:1400/format:webp/1*6Jp3vJWe7VFlFHZ9WhSJng.jpeg");
+  background-size: cover; 
+  height: 450px; 
+  text-align: center;
+}
+
+.active-menu {
+  background-color: white;
+  border-radius: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: #212529 !important;
+  font-weight: 600;
+}
+
+.book-image {
+  width: 100%;
+  height: auto;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.active-profile-menu {
+  background-color: #0d6efd;
+  border-radius: 3px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  color: white !important;
+}

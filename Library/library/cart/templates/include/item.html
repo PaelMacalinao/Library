@@ -1,0 +1,31 @@
+<tr>
+    <td class="p-4">
+      <div class="d-flex flex-row gap-3 align-items-center">
+        <img src="{{item.product.thumbnailUrl}}" class="book-image" alt="">
+        <div class="d-flex flex-column justify-content-center">
+          <h5 class="m-0">{{item.product.title}}</h5>
+          <small class="d-flex flex-column">
+            <span class="text-muted">{{item.product.description}}</span>
+              <span class="text-muted">
+                {% if item.product.authors|length > 1 %}
+                  Authors:
+                {% else %}
+                  Author:
+                {% endif %}
+                <span class="text-black">
+                {% for author in item.product.authors %}
+                  {{author}}
+                  {% if not forloop.last %},{% endif %}
+                {% endfor %}
+              </span>
+            </span>
+          </small>
+        </div>
+      </div>
+    </td>
+    <td class="text-center font-weight-semibold align-middle p-4">{{item.product.price}}</td>
+    <td class="align-middle p-4"><input min="0" type="number" id="typeNumber" class="form-control" value="{{ item.quantity }}" data-cart-item-id="{{ item.id }}" onchange="updateQuantity(this)"/></td>
+    <td class="text-center font-weight-semibold align-middle p-4">{{ item.total_cost }}</td>
+    <td class="text-center align-middle px-0"><a href="{% url 'removeItem' item.product.id %}" class="shop-tooltip close float-none p-4" title="" data-original-title="Remove"><i class="text-danger fa-solid fa-square-xmark fa-xl"></a></td>
+</tr>
+

@@ -1,0 +1,20 @@
+<div class="d-flex flex-row justify-content-end">
+  <nav class="nav nav-borders">
+    <a
+      class="nav-link text-dark {% if request.path == '/profile/' %}active-profile-menu{% endif %}"
+      href="{% url 'profile' %}"
+      >Profile</a
+    >
+    <a
+      class="nav-link text-dark {% if request.path == '/profile/history' %}active-profile-menu{% endif %}"
+      href="{% url 'history' %}"
+      >History</a
+    >
+    <a
+      class="nav-link text-dark {% if request.path == '/profile/security' %}active-profile-menu{% endif %}"
+      href="{% url 'security' %}"
+      >Security</a
+    >
+  </nav>
+</div>
+<hr class="mt-0 mb-4" />

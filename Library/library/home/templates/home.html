@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% include "include/menu.html" %}
+{% endblock  %}
+
+{% block content %}
+    {% include "include/heading.html" %}
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container-fluid px-5">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+            {% for book in objects.object_list %}
+                {% include "include/book.html" with book=book %}
+            {% endfor %}
+          </div>
+        </div>
+        {% if objects.object_list and book_count > 12 %}
+            {% include "include/pagination.html" %}
+        {% endif %}
+    </div>
+{% endblock  %}
+
+{% block footer %}
+    {% include "include/footer.html" %}
+{% endblock  %}

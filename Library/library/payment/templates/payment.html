@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column ;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-title {
+            display: inline;
+            font-weight: bold;
+        }
+
+        .checkbox.pull-right {
+            margin: 0;
+        }
+
+        .pl-ziro {
+            padding-left: 0px;
+        }
+
+        .payment-btn{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    {% if messages %} {% for message in messages %}
+    <div
+      class="alert alert-warning alert-dismissible fade show m-0"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %}
+    <div class="col-xs-12 col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Payment Details</h3>
+            </div>
+            <div class="panel-body">
+                <form method="POST" 
+                    action=" {% if request.path == '/payment/buy/' %}
+                                {% url 'payment_buy' product_id %}
+                             {% elif request.path == '/payment/checkout/' %}
+                                {% url 'payment_checkout' cart_id %}
+                             {% endif %}" 
+                    role="form">
+				    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="cardNumber"> CARD NUMBER</label>
+                        <div class="input-group">
+                            <input
+                                name="card"
+                                type="text"
+                                class="form-control"
+                                id="cardNumber"
+                                placeholder="Valid Card Number"
+                                required
+                                autofocus
+                            />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        </div>
+                        <input type="hidden" name="product_id" value="{{product_id}}">
+                        <input type="hidden" name="total_balance" value="{{total_balance}}">
+                    </div>
+                    <div class="payment-btn">
+                        <div>
+                            <span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>{{total_balance}}</span>
+                            Final Payment
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-lg btn-block" role="button" type="submit">Pay</button>
+                    </div>
+                </form>
+            </div>
+        </div>   
+    </div>
+</body>
+</html>
